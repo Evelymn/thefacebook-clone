@@ -1,11 +1,21 @@
 /* thefacebook 2004 - Diseño EXACTO */
 
 * {
+    /* Resetea los márgenes y rellenos predeterminados de todos los elementos */
+    margin: 0;
+    padding: 0;
+}
+
+/* thefacebook 2004 - Diseño EXACTO */
+
+* {
+    /* Resetea los márgenes y rellenos predeterminados de todos los elementos */
     margin: 0;
     padding: 0;
 }
 
 body {
+    /* Fuente clásica de Windows y el diseño web temprano */
     font-family: Verdana, Arial, Helvetica, sans-serif;
     font-size: 11px;
     background-color: #ffffff;
@@ -13,68 +23,97 @@ body {
 }
 
 a {
+    /* Color azul clásico de Facebook para todos los enlaces */
     color: #3B5998;
     text-decoration: none;
 }
 
 a:hover {
+    /* Subraya el enlace al pasar el ratón */
     text-decoration: underline;
 }
 
-/* ========== HEADER / NAVBAR ========== */
+/* ========== HEADER / NAVBAR (Barra azul superior) ========== */
 .header {
     background-color: #3B5998;
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAyCAYAAACd+7GKAAAAPklEQVR42mNgYGD4z8DAwMDIwMDwn4GB4T8DAwMDIwMDw38GBob/DAwMDIwMDAz/GRgY/jMwMDAwMjAw/AcAF6oH/W0kbwQAAAAASUVORK5CYII=');
-    background-repeat: repeat-x;
-    padding: 2px 0;
+    height: 80px;
+    position: relative;
+
+    /* La imagen de fondo binaria no se puede replicar fácilmente en CSS puro sin un archivo real. 
+               Se ha omitido, manteniendo solo el color azul. */
+    overflow: hidden;
     border-bottom: 1px solid #133783;
 }
 
 .header-content {
-    max-width: 760px;
+    /* Centra el contenido y establece el ancho máximo */
+    max-width: 780px;
     margin: 0 auto;
     padding: 0 10px;
     overflow: hidden;
-}
-
-.header-content {
+    /* Usa Flexbox para alinear verticalmente el retrato, el logo y los enlaces */
     display: flex;
     align-items: center;
 }
 
 .header-portrait {
-    width: 60px;
-    height: 60px;
+    /* Estilo para la foto de perfil en la esquina superior */
+    background-color: rgb(19, 18, 19);
+    /* Color de fondo temporal para visualizar el área */
+    width: 100px;
+    height: 80px;
+    position: absolute;
+    left: 300px;
+    top: 0;
     object-fit: cover;
     border: 1px solid rgba(255, 255, 255, 0.15);
     margin-right: 12px;
 }
 
+
+
 .header-right {
     margin-left: auto;
+    right: 0;
+    top: 16px;
+    /* Ajuste para el margen superior */
     text-align: right;
+    padding-right: 16px;
 }
+
 
 .header-logo {
     color: #ffffff;
-    font-size: 22px;
+    font-size: 32px;
+    /* Un poco más grande para el estilo 'h1' */
     font-weight: bold;
-    text-decoration: none;
     display: block;
-    line-height: 20px;
-    margin-bottom: 4px;
+    line-height: 1;
+}
+
+
+/* Estilos para los corchetes */
+.header-logo span {
+    opacity: 0.6;
+    color: #ffffff;
+
+
 }
 
 .header-logo:hover {
-    text-decoration: none;
+    text-decoration: underline;
 }
 
 .header-links {
+    /* Contenedor para los enlaces "login register about" */
     font-size: 12px;
     line-height: 18px;
 }
 
+
+
 .header-links a {
+    /* Estilo de los enlaces en la barra superior */
     color: #ffffff;
     text-decoration: none;
     margin-left: 8px;
@@ -82,30 +121,47 @@ a:hover {
     padding: 2px 6px;
 }
 
+
 .header-links a:hover {
     text-decoration: underline;
 }
 
-/* ========== CONTAINER PRINCIPAL ========== */
+/* ========== CONTAINER PRINCIPAL (Cuerpo principal de la página) ========== */
 .container {
+    /* Ancho fijo para centrar todo el contenido */
     width: 760px;
-    /* reducir espacio superior para unir la cabecera con la barra azul interior */
+    /* Espacio superior e inferior */
     margin: 6px auto 20px;
     padding: 0 10px;
 }
 
 /* Caja exterior con borde - ESTO ES LO IMPORTANTE */
 .outer-box {
+    /* El contenedor principal de una página, con el borde de 1px gris claro */
     border: 1px solid #CCCCCC;
     background-color: #ffffff;
+    /* Esquinas ligeramente redondeadas, típicas de los diseños modernos (puedes quitarlo si buscas 100% 2004) */
     border-radius: 6px;
     box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);
     overflow: hidden;
-    /* keep internal layout full-width */
     width: 100%;
 }
 
-/* Encabezado con imagen */
+/* Quitar solo la línea inferior del panel (evita la línea que queda debajo del login) */
+.outer-box {
+    border-bottom: none;
+}
+
+/* Estilos específicos cuando queremos un borde azul alrededor del panel de login */
+.outer-box.login-outer {
+    /* Sobrescribe el borde gris por uno azul, dejando el padding exterior que lo separa del contenido */
+    border: 1px solid #29447E;
+    background-color: #ffffff;
+    border-radius: 4px;
+    padding: 10px;
+}
+
+/* Encabezado con imagen (Para páginas internas, como la caja azul dentro del perfil) */
 .page-header {
     background-color: #3B5998;
     background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAyCAYAAACd+7GKAAAAPklEQVR42mNgYGD4z8DAwMDIwMDwn4GB4T8DAwMDIwMDw38GBob/DAwMDIwMDAz/GRgY/jMwMDAwMjAw/AcAF6oH/W0kbwQAAAAASUVORK5CYII=');
@@ -123,21 +179,25 @@ a:hover {
 
 /* Sidebar / Content inside the unified panel */
 .outer-box table {
+    /* Usamos tablas para la disposición lateral, un truco de diseño antiguo */
     width: 100%;
     border-collapse: collapse;
 }
 
 .outer-box td.sidebar {
+    /* Estilo para la columna de menú lateral (sidebar) */
     width: 170px;
     vertical-align: top;
     padding: 12px;
+    /* Borde punteado clásico para separar el menú del contenido */
     border-right: 1px dotted #999999;
     background-color: #FFFFFF;
 }
 
 .sidebar .login-panel {
-    border: 1px dotted #999999;
-    padding: 8px;
+    /* Contenedor del formulario de login en la barra lateral */
+    border: 1px dashed #999999;
+    padding: 10px;
     background-color: #ffffff;
 }
 
@@ -146,11 +206,12 @@ a:hover {
 }
 
 .outer-box td.content {
+    /* Estilo para la columna principal de contenido */
     vertical-align: top;
     padding: 15px;
 }
 
-/* Button utilities to replace inline styles */
+/* Button utilities to replace inline styles (Botones reutilizables) */
 .btn {
     display: inline-block;
     padding: 4px 12px;
@@ -161,6 +222,7 @@ a:hover {
 }
 
 .btn-primary {
+    /* Botón azul principal (Login/Enviar) */
     background-color: #4C66A4;
     color: #ffffff;
     border: 1px solid #29447E;
@@ -170,6 +232,7 @@ a:hover {
 }
 
 .btn-ghost {
+    /* Botón secundario o "fantasma" */
     background-color: transparent;
     color: #3B5998;
     border: 1px solid #CCCCCC;
@@ -177,26 +240,44 @@ a:hover {
 
 /* Generic input field used in sidebar */
 .input-field {
-    width: 120px;
+    /* Estilo de los campos de entrada (sidebar) */
+    width: 160px;
     padding: 3px 4px;
     border: 1px solid #BDC7D8;
     font-size: 11px;
 }
 
-/* Content inner box to match screenshot */
+/* Content inner box to match screenshot (Caja interior de contenido) */
 .content .content-box {
     border: 1px solid #CCCCCC;
     background-color: #ffffff;
     padding: 18px;
 }
 
-/* ========== LOGIN PAGE ========== */
-.login-container {
-    max-width: 760px;
-    margin: 20px auto;
-    padding: 0 10px;
+/* ========== LOGIN PAGE (Estilos específicos del formulario de login) ========== */
+/* Esta sección estaba en tu código y se usa para alinear etiquetas e inputs */
+.login-content form div {
+    /* Añade un contenedor para cada par label/input */
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: center;
 }
 
+.login-content label {
+    font-weight: bold;
+    margin-top: 0;
+    display: inline-block;
+    text-align: right;
+    width: 80px;
+    padding-right: 5px;
+}
+
+.login-content input[type="email"],
+.login-content input[type="password"] {
+    width: 160px;
+}
+
+/* Estilo para la caja del formulario de login central */
 .login-form-box {
     border: 1px solid #CCCCCC;
     background-color: #ffffff;
@@ -205,14 +286,19 @@ a:hover {
 }
 
 .login-form-box h1 {
-    font-size: 14px;
+    /* **CAMBIO:** Hacemos el texto más grande, como en la referencia (similar a un H1 grande) */
+    font-size: 18px;
+    /* Era 14px, lo aumentamos */
     font-weight: bold;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    /* Le damos más espacio debajo */
     color: #000000;
+    /* Aseguramos que sea negro */
     text-align: center;
 }
 
 .login-form {
+    /* Contenedor interno del formulario */
     width: 350px;
     margin: 0 auto;
 }
@@ -236,6 +322,7 @@ a:hover {
 }
 
 .login-form input[type="submit"] {
+    /* Estilo del botón de envío dentro del formulario */
     padding: 3px 15px;
     background-color: #3B5998;
     color: #ffffff;
@@ -246,6 +333,7 @@ a:hover {
 }
 
 .login-info {
+    /* Caja de información debajo del formulario */
     background-color: #ffffff;
     border: 1px solid #CCCCCC;
     padding: 15px;
@@ -270,7 +358,7 @@ a:hover {
     margin-bottom: 8px;
 }
 
-/* ========== REGISTER PAGE ========== */
+/* ========== REGISTER PAGE (Estilos para la página de registro) ========== */
 .register-container {
     max-width: 760px;
     margin: 20px auto;
@@ -307,6 +395,7 @@ a:hover {
 .register-form input[type="email"],
 .register-form input[type="password"],
 .register-form textarea {
+    /* Campos de entrada más anchos para el formulario de registro */
     width: 300px;
     padding: 3px;
     border: 1px solid #BDC7D8;
@@ -326,6 +415,7 @@ a:hover {
 }
 
 .register-form input[type="submit"] {
+    /* Botón de envío del formulario de registro */
     padding: 5px 20px;
     background-color: #3B5998;
     color: #ffffff;
@@ -336,7 +426,7 @@ a:hover {
     margin-top: 10px;
 }
 
-/* ========== PROFILE PAGE ========== */
+/* ========== PROFILE PAGE (Estilos para la página de perfil) ========== */
 .profile-container {
     max-width: 760px;
     margin: 20px auto;
@@ -344,6 +434,7 @@ a:hover {
 }
 
 .profile-header {
+    /* Encabezado del perfil, color gris azulado claro */
     background-color: #D9DFEA;
     border: 1px solid #CCCCCC;
     padding: 10px;
@@ -357,6 +448,7 @@ a:hover {
 }
 
 .profile-content {
+    /* Caja principal del contenido del perfil */
     border: 1px solid #CCCCCC;
     background-color: #ffffff;
 }
@@ -366,6 +458,7 @@ a:hover {
 }
 
 .profile-picture-cell {
+    /* Celda de la foto de perfil */
     width: 200px;
     vertical-align: top;
     padding: 10px;
@@ -380,11 +473,13 @@ a:hover {
 }
 
 .profile-info-cell {
+    /* Celda de la información de usuario */
     vertical-align: top;
     padding: 10px;
 }
 
 .info-section {
+    /* Sección de información (Básico, Contacto, etc.) */
     margin-bottom: 15px;
     border-bottom: 1px solid #EEEEEE;
     padding-bottom: 10px;
@@ -420,8 +515,9 @@ a:hover {
     color: #000000;
 }
 
-/* ========== ALERT MESSAGES ========== */
+/* ========== ALERT MESSAGES (Mensajes de error y éxito) ========== */
 .error-message {
+    /* Estilo clásico para mensajes de error (fondo rosa/borde rojo) */
     background-color: #FFEBE8;
     border: 1px solid #DD3C10;
     color: #DD3C10;
@@ -431,6 +527,7 @@ a:hover {
 }
 
 .success-message {
+    /* Estilo clásico para mensajes de éxito (fondo verde claro/borde verde) */
     background-color: #E7F3E7;
     border: 1px solid #5BA85B;
     color: #2B542C;
@@ -444,7 +541,7 @@ a:hover {
     font-weight: bold;
 }
 
-/* ========== FOOTER ========== */
+/* ========== FOOTER (Pie de página con enlaces legales) ========== */
 .footer {
     max-width: 760px;
     margin: 10px auto;
@@ -452,6 +549,7 @@ a:hover {
     font-size: 10px;
     color: #666666;
     padding: 10px 10px 5px 10px;
+    border-top: none;
 }
 
 .footer a {
@@ -459,7 +557,7 @@ a:hover {
     margin: 0 5px;
 }
 
-/* ========== CREATORS PAGE ========== */
+/* ========== CREATORS PAGE (Ejemplo de otra página interna) ========== */
 .creators-box {
     border: 1px solid #CCCCCC;
     background-color: #ffffff;
@@ -483,6 +581,7 @@ a:hover {
 }
 
 .creator-info {
+    /* Caja de información de los creadores (fondo gris claro) */
     border: 1px solid #CCCCCC;
     background-color: #F7F7F7;
     padding: 10px;
@@ -524,23 +623,26 @@ a:hover {
     line-height: 1.5;
 }
 
-/* ========== RESPONSIVE ========== */
+/* ========== RESPONSIVE (Ajustes para móviles y pantallas pequeñas) ========== */
 @media (max-width: 768px) {
 
     .container,
     .login-container,
     .register-container,
     .profile-container {
+        /* Ocupa todo el ancho disponible en pantallas pequeñas */
         width: 100%;
         margin: 10px;
     }
 
     .outer-box table {
+        /* Convierte la tabla de diseño a bloques para que las columnas se apilen */
         display: block;
     }
 
     .outer-box td.sidebar,
     .outer-box td.content {
+        /* Asegura que el sidebar y el contenido ocupen todo el ancho y elimina los bordes de separación */
         display: block;
         width: 100% !important;
         border: none !important;
@@ -548,7 +650,17 @@ a:hover {
     }
 
     .page-header {
+        /* Centra el contenido de la cabecera en móvil */
         justify-content: center;
         text-align: center;
     }
+}
+
+/* Variación para la página de login: borde azul exterior similar a la referencia */
+.login-outer {
+    border: 1px solid #29447E;
+    border-radius: 4px;
+    padding: 12px 14px;
+    margin-bottom: 18px;
+    background-color: #ffffff;
 }

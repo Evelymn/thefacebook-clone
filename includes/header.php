@@ -25,7 +25,8 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['user_avatar'])) {
 
         <!-- Logo y links alineados a la derecha -->
         <div class="header-right">
-            <a href="index.php" class="header-logo">[ thefacebook ]</a>
+            <a href="index.php" class="header-logo">
+                <span>[</span> thefacebook <span>]</span>
             <div class="header-links">
                 <!-- Mostrar diferentes links según si está logueado o no -->
                 <?php if (isset($_SESSION['user_id'])): ?>
@@ -39,7 +40,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['user_avatar'])) {
                     <a href="logout.php">logout</a>
                 <?php else: ?>
                     <!-- Links para usuarios no logueados -->
-                    <a href="login.php">login</a>
+                    <a href="#" onclick="document.querySelector('input[type=email]').focus()" class=>Login</a>
                     <a href="register.php">register</a>
                     <a href="contact.php">about</a>
                 <?php endif; ?>
