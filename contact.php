@@ -27,23 +27,8 @@ $conn->close();
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <nav class="navbar">
-        <a href="home.php" class="navbar-brand">thefacebook</a>
-        
-        <div class="navbar-menu">
-            <a href="home.php">Mi Perfil</a>
-            <a href="contact.php">Creadores</a>
-            
-            <div class="navbar-user">
-                <img src="assets/images/avatars/<?php echo htmlspecialchars($user['avatar']); ?>" 
-                     alt="Avatar" 
-                     class="navbar-avatar"
-                     onerror="this.src='assets/images/avatars/default-avatar.jpg'">
-                <span><?php echo htmlspecialchars($user['name']); ?></span>
-                <a href="logout.php" style="margin-left: 10px;">[salir]</a>
-            </div>
-        </div>
-    </div>
+    <!-- INCLUIR HEADER REUTILIZABLE -->
+    <?php include 'includes/header.php'; ?>
     
     <div class="main-container">
         <div class="profile-header">

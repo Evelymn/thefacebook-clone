@@ -58,22 +58,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <!-- NAVBAR AZUL -->
-    <div class="header">
-        <div class="header-content">
-            <!-- portrait on the left of the top bar -->
-            <img src="assets/images/avatars/mi-foto.jpg" alt="" class="header-portrait">
-
-            <div class="header-right">
-                <a href="index.php" class="header-logo">[ thefacebook ]</a>
-                <div class="header-links">
-                    <a href="login.php">login</a>
-                    <a href="register.php">register</a>
-                    <a href="contact.php">about</a>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- INCLUIR HEADER REUTILIZABLE -->
+    <?php include 'includes/header.php'; ?>
 
     <!-- CONTENEDOR PRINCIPAL CON BORDE -->
     <div class="container">
