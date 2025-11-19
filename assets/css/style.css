@@ -1,0 +1,539 @@
+/* thefacebook 2004 Complete CSS */
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    background-color: #ffffff;
+    color: #000000;
+}
+
+a {
+    color: #3B5998;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* ============= HEADER ============= */
+.header {
+    background-color: #3B5998;
+    padding: 4px 0;
+    border-bottom: 1px solid #133783;
+}
+
+.header-content {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 10px;
+    overflow: hidden;
+}
+
+.header-logo {
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    float: left;
+    line-height: 16px;
+}
+
+.header-logo:hover {
+    text-decoration: none;
+}
+
+.header-links {
+    float: right;
+    font-size: 10px;
+}
+
+.header-links a {
+    color: #ffffff;
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+.header-links a:hover {
+    text-decoration: underline;
+}
+
+/* ============= CONTAINER ============= */
+.container {
+    width: 760px;
+    margin: 0 auto;
+}
+
+/* ============= WELCOME PAGE (index.php) ============= */
+.main-content {
+    display: table;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.left-column {
+    display: table-cell;
+    width: 180px;
+    vertical-align: top;
+    padding-right: 10px;
+}
+
+.right-column {
+    display: table-cell;
+    vertical-align: top;
+    padding-left: 10px;
+}
+
+.login-box {
+    border: 1px dotted #999999;
+    padding: 10px;
+    background-color: #ffffff;
+    text-align: center;
+}
+
+.login-box table {
+    margin: 0 auto;
+}
+
+.login-box td {
+    padding: 3px;
+    font-size: 11px;
+    text-align: right;
+}
+
+.login-box input[type="text"],
+.login-box input[type="email"],
+.login-box input[type="password"] {
+    width: 120px;
+    padding: 2px;
+    border: 1px solid #BDC7D8;
+    font-size: 11px;
+}
+
+.login-box input[type="submit"],
+.login-box input[type="button"] {
+    padding: 2px 8px;
+    font-size: 10px;
+    cursor: pointer;
+    margin: 2px;
+    background-color: #f0f0f0;
+    border: 1px solid #999999;
+}
+
+.welcome-box {
+    border: 1px solid #CCCCCC;
+    padding: 15px;
+    background-color: #F7F7F7;
+}
+
+.welcome-box h1 {
+    font-size: 16px;
+    margin: 0 0 10px 0;
+    text-align: center;
+    font-weight: bold;
+}
+
+.welcome-box p {
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.welcome-box ul {
+    margin-left: 20px;
+    line-height: 1.8;
+}
+
+.welcome-box .buttons {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.welcome-box .buttons input {
+    padding: 3px 15px;
+    font-size: 11px;
+    margin: 0 5px;
+    cursor: pointer;
+    background-color: #4C66A4;
+    color: #ffffff;
+    border: 1px solid #29447E;
+    font-weight: bold;
+}
+
+/* ============= LOGIN PAGE ============= */
+.login-container {
+    max-width: 760px;
+    margin: 20px auto;
+    padding: 0 10px;
+}
+
+.login-form-box {
+    border: 1px solid #CCCCCC;
+    background-color: #ffffff;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+.login-form-box h1 {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #000000;
+    text-align: center;
+}
+
+.login-form {
+    width: 350px;
+    margin: 0 auto;
+}
+
+.login-form table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.login-form td {
+    padding: 4px;
+    font-size: 11px;
+}
+
+.login-form input[type="email"],
+.login-form input[type="password"] {
+    width: 200px;
+    padding: 3px;
+    border: 1px solid #BDC7D8;
+    font-size: 11px;
+}
+
+.login-form input[type="submit"] {
+    padding: 3px 15px;
+    background-color: #3B5998;
+    color: #ffffff;
+    border: 1px solid #29447E;
+    font-size: 11px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.login-info {
+    background-color: #ffffff;
+    border: 1px solid #CCCCCC;
+    padding: 15px;
+    margin-top: 10px;
+    line-height: 1.6;
+}
+
+.login-info h2 {
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #3B5998;
+}
+
+.login-info ul {
+    margin-left: 18px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.login-info p {
+    margin-bottom: 8px;
+}
+
+/* ============= REGISTER PAGE ============= */
+.register-container {
+    max-width: 760px;
+    margin: 20px auto;
+    padding: 0 10px;
+}
+
+.register-box {
+    border: 1px solid #CCCCCC;
+    background-color: #ffffff;
+    padding: 15px;
+}
+
+.register-box h1 {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #3B5998;
+}
+
+.register-form {
+    margin-top: 15px;
+}
+
+.register-form table {
+    width: 100%;
+}
+
+.register-form td {
+    padding: 5px;
+    font-size: 11px;
+}
+
+.register-form input[type="text"],
+.register-form input[type="email"],
+.register-form input[type="password"],
+.register-form textarea {
+    width: 300px;
+    padding: 3px;
+    border: 1px solid #BDC7D8;
+    font-size: 11px;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+.register-form textarea {
+    height: 60px;
+}
+
+.register-form .small-text {
+    font-size: 10px;
+    color: #666666;
+    display: block;
+    margin-top: 3px;
+}
+
+.register-form input[type="submit"] {
+    padding: 5px 20px;
+    background-color: #3B5998;
+    color: #ffffff;
+    border: 1px solid #29447E;
+    font-size: 11px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* ============= PROFILE PAGE ============= */
+.profile-container {
+    max-width: 760px;
+    margin: 20px auto;
+    padding: 0 10px;
+}
+
+.profile-header {
+    background-color: #D9DFEA;
+    border: 1px solid #CCCCCC;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.profile-header h1 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #3B5998;
+}
+
+.profile-content {
+    border: 1px solid #CCCCCC;
+    background-color: #ffffff;
+}
+
+.profile-content table {
+    width: 100%;
+}
+
+.profile-picture-cell {
+    width: 200px;
+    vertical-align: top;
+    padding: 10px;
+    border-right: 1px solid #CCCCCC;
+}
+
+.profile-picture {
+    width: 200px;
+    height: 200px;
+    border: 1px solid #CCCCCC;
+    object-fit: cover;
+}
+
+.profile-info-cell {
+    vertical-align: top;
+    padding: 10px;
+}
+
+.info-section {
+    margin-bottom: 15px;
+    border-bottom: 1px solid #EEEEEE;
+    padding-bottom: 10px;
+}
+
+.info-section:last-child {
+    border-bottom: none;
+}
+
+.info-section h3 {
+    font-size: 12px;
+    font-weight: bold;
+    color: #3B5998;
+    margin-bottom: 5px;
+}
+
+.info-section table {
+    width: 100%;
+    font-size: 11px;
+}
+
+.info-section td {
+    padding: 2px 5px;
+}
+
+.info-label {
+    font-weight: bold;
+    color: #666666;
+    width: 150px;
+}
+
+.info-value {
+    color: #000000;
+}
+
+/* ============= ALERT MESSAGES ============= */
+.error-message {
+    background-color: #FFEBE8;
+    border: 1px solid #DD3C10;
+    color: #DD3C10;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 11px;
+}
+
+.success-message {
+    background-color: #E7F3E7;
+    border: 1px solid #5BA85B;
+    color: #2B542C;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 11px;
+}
+
+.success-message a {
+    color: #3B5998;
+    font-weight: bold;
+}
+
+/* ============= FOOTER ============= */
+.footer {
+    max-width: 760px;
+    margin: 20px auto;
+    text-align: center;
+    font-size: 10px;
+    color: #666666;
+    padding: 10px;
+    border-top: 1px solid #CCCCCC;
+}
+
+.footer a {
+    color: #3B5998;
+    margin: 0 5px;
+}
+
+/* ============= CREATORS PAGE ============= */
+.creators-box {
+    border: 1px solid #CCCCCC;
+    background-color: #ffffff;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+.creators-box h1 {
+    font-size: 16px;
+    font-weight: bold;
+    color: #3B5998;
+    margin-bottom: 10px;
+}
+
+.creators-box h2 {
+    font-size: 14px;
+    font-weight: bold;
+    color: #3B5998;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.creator-info {
+    border: 1px solid #CCCCCC;
+    background-color: #F7F7F7;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.creator-info table {
+    width: 100%;
+}
+
+.creator-photo-cell {
+    width: 150px;
+    vertical-align: top;
+    text-align: center;
+}
+
+.creator-photo {
+    width: 150px;
+    height: 150px;
+    border: 1px solid #CCCCCC;
+    object-fit: cover;
+}
+
+.creator-details-cell {
+    vertical-align: top;
+    padding-left: 10px;
+}
+
+.creator-details-cell h3 {
+    font-size: 14px;
+    font-weight: bold;
+    color: #3B5998;
+    margin-bottom: 5px;
+}
+
+.creator-details-cell p {
+    font-size: 11px;
+    margin-bottom: 3px;
+    line-height: 1.5;
+}
+
+/* ============= RESPONSIVE ============= */
+@media (max-width: 768px) {
+
+    .container,
+    .login-container,
+    .register-container,
+    .profile-container {
+        width: 100%;
+        margin: 10px;
+    }
+
+    .main-content {
+        display: block;
+    }
+
+    .left-column,
+    .right-column {
+        display: block;
+        width: 100%;
+        padding: 0;
+        margin-bottom: 10px;
+    }
+
+    .profile-content table,
+    .creator-info table {
+        display: block;
+    }
+
+    .profile-picture-cell,
+    .profile-info-cell,
+    .creator-photo-cell,
+    .creator-details-cell {
+        display: block;
+        width: 100%;
+        border: none;
+        padding: 10px 0;
+    }
+}
