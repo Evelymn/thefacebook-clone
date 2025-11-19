@@ -1,4 +1,4 @@
-/* thefacebook 2004 Complete CSS */
+/* thefacebook 2004 - Diseño EXACTO */
 
 * {
     margin: 0;
@@ -21,10 +21,12 @@ a:hover {
     text-decoration: underline;
 }
 
-/* ============= HEADER ============= */
+/* ========== HEADER / NAVBAR ========== */
 .header {
     background-color: #3B5998;
-    padding: 4px 0;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAyCAYAAACd+7GKAAAAPklEQVR42mNgYGD4z8DAwMDIwMDwn4GB4T8DAwMDIwMDw38GBob/DAwMDIwMDAz/GRgY/jMwMDAwMjAw/AcAF6oH/W0kbwQAAAAASUVORK5CYII=');
+    background-repeat: repeat-x;
+    padding: 2px 0;
     border-bottom: 1px solid #133783;
 }
 
@@ -35,13 +37,32 @@ a:hover {
     overflow: hidden;
 }
 
+.header-content {
+    display: flex;
+    align-items: center;
+}
+
+.header-portrait {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    margin-right: 12px;
+}
+
+.header-right {
+    margin-left: auto;
+    text-align: right;
+}
+
 .header-logo {
     color: #ffffff;
-    font-size: 14px;
+    font-size: 22px;
     font-weight: bold;
     text-decoration: none;
-    float: left;
-    line-height: 16px;
+    display: block;
+    line-height: 20px;
+    margin-bottom: 4px;
 }
 
 .header-logo:hover {
@@ -49,122 +70,127 @@ a:hover {
 }
 
 .header-links {
-    float: right;
-    font-size: 10px;
+    font-size: 12px;
+    line-height: 18px;
 }
 
 .header-links a {
     color: #ffffff;
     text-decoration: none;
-    margin-left: 10px;
+    margin-left: 8px;
+    background: transparent;
+    padding: 2px 6px;
 }
 
 .header-links a:hover {
     text-decoration: underline;
 }
 
-/* ============= CONTAINER ============= */
+/* ========== CONTAINER PRINCIPAL ========== */
 .container {
     width: 760px;
-    margin: 0 auto;
+    /* reducir espacio superior para unir la cabecera con la barra azul interior */
+    margin: 6px auto 20px;
+    padding: 0 10px;
 }
 
-/* ============= WELCOME PAGE (index.php) ============= */
-.main-content {
-    display: table;
-    width: 100%;
-    margin-top: 20px;
-}
-
-.left-column {
-    display: table-cell;
-    width: 180px;
-    vertical-align: top;
-    padding-right: 10px;
-}
-
-.right-column {
-    display: table-cell;
-    vertical-align: top;
-    padding-left: 10px;
-}
-
-.login-box {
-    border: 1px dotted #999999;
-    padding: 10px;
-    background-color: #ffffff;
-    text-align: center;
-}
-
-.login-box table {
-    margin: 0 auto;
-}
-
-.login-box td {
-    padding: 3px;
-    font-size: 11px;
-    text-align: right;
-}
-
-.login-box input[type="text"],
-.login-box input[type="email"],
-.login-box input[type="password"] {
-    width: 120px;
-    padding: 2px;
-    border: 1px solid #BDC7D8;
-    font-size: 11px;
-}
-
-.login-box input[type="submit"],
-.login-box input[type="button"] {
-    padding: 2px 8px;
-    font-size: 10px;
-    cursor: pointer;
-    margin: 2px;
-    background-color: #f0f0f0;
-    border: 1px solid #999999;
-}
-
-.welcome-box {
+/* Caja exterior con borde - ESTO ES LO IMPORTANTE */
+.outer-box {
     border: 1px solid #CCCCCC;
+    background-color: #ffffff;
+    border-radius: 6px;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    /* keep internal layout full-width */
+    width: 100%;
+}
+
+/* Encabezado con imagen */
+.page-header {
+    background-color: #3B5998;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAyCAYAAACd+7GKAAAAPklEQVR42mNgYGD4z8DAwMDIwMDwn4GB4T8DAwMDIwMDw38GBob/DAwMDIwMDAz/GRgY/jMwMDAwMjAw/AcAF6oH/W0kbwQAAAAASUVORK5CYII=');
+    background-repeat: repeat-x;
+    padding: 12px 14px;
+    text-align: left;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+}
+
+.header-image {
+    margin: 0;
+}
+
+/* Sidebar / Content inside the unified panel */
+.outer-box table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.outer-box td.sidebar {
+    width: 170px;
+    vertical-align: top;
+    padding: 12px;
+    border-right: 1px dotted #999999;
+    background-color: #FFFFFF;
+}
+
+.sidebar .login-panel {
+    border: 1px dotted #999999;
+    padding: 8px;
+    background-color: #ffffff;
+}
+
+.sidebar .login-panel .input-row {
+    margin-bottom: 6px;
+}
+
+.outer-box td.content {
+    vertical-align: top;
     padding: 15px;
-    background-color: #F7F7F7;
 }
 
-.welcome-box h1 {
-    font-size: 16px;
-    margin: 0 0 10px 0;
-    text-align: center;
-    font-weight: bold;
-}
-
-.welcome-box p {
-    line-height: 1.6;
-    margin-bottom: 10px;
-}
-
-.welcome-box ul {
-    margin-left: 20px;
-    line-height: 1.8;
-}
-
-.welcome-box .buttons {
-    text-align: center;
-    margin-top: 15px;
-}
-
-.welcome-box .buttons input {
-    padding: 3px 15px;
+/* Button utilities to replace inline styles */
+.btn {
+    display: inline-block;
+    padding: 4px 12px;
     font-size: 11px;
-    margin: 0 5px;
     cursor: pointer;
+    border-radius: 3px;
+    text-decoration: none;
+}
+
+.btn-primary {
     background-color: #4C66A4;
     color: #ffffff;
     border: 1px solid #29447E;
     font-weight: bold;
+    padding: 3px 10px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.15) inset;
 }
 
-/* ============= LOGIN PAGE ============= */
+.btn-ghost {
+    background-color: transparent;
+    color: #3B5998;
+    border: 1px solid #CCCCCC;
+}
+
+/* Generic input field used in sidebar */
+.input-field {
+    width: 120px;
+    padding: 3px 4px;
+    border: 1px solid #BDC7D8;
+    font-size: 11px;
+}
+
+/* Content inner box to match screenshot */
+.content .content-box {
+    border: 1px solid #CCCCCC;
+    background-color: #ffffff;
+    padding: 18px;
+}
+
+/* ========== LOGIN PAGE ========== */
 .login-container {
     max-width: 760px;
     margin: 20px auto;
@@ -244,7 +270,7 @@ a:hover {
     margin-bottom: 8px;
 }
 
-/* ============= REGISTER PAGE ============= */
+/* ========== REGISTER PAGE ========== */
 .register-container {
     max-width: 760px;
     margin: 20px auto;
@@ -310,7 +336,7 @@ a:hover {
     margin-top: 10px;
 }
 
-/* ============= PROFILE PAGE ============= */
+/* ========== PROFILE PAGE ========== */
 .profile-container {
     max-width: 760px;
     margin: 20px auto;
@@ -394,7 +420,7 @@ a:hover {
     color: #000000;
 }
 
-/* ============= ALERT MESSAGES ============= */
+/* ========== ALERT MESSAGES ========== */
 .error-message {
     background-color: #FFEBE8;
     border: 1px solid #DD3C10;
@@ -418,15 +444,14 @@ a:hover {
     font-weight: bold;
 }
 
-/* ============= FOOTER ============= */
+/* ========== FOOTER ========== */
 .footer {
     max-width: 760px;
-    margin: 20px auto;
+    margin: 10px auto;
     text-align: center;
     font-size: 10px;
     color: #666666;
-    padding: 10px;
-    border-top: 1px solid #CCCCCC;
+    padding: 10px 10px 5px 10px;
 }
 
 .footer a {
@@ -434,7 +459,7 @@ a:hover {
     margin: 0 5px;
 }
 
-/* ============= CREATORS PAGE ============= */
+/* ========== CREATORS PAGE ========== */
 .creators-box {
     border: 1px solid #CCCCCC;
     background-color: #ffffff;
@@ -499,7 +524,7 @@ a:hover {
     line-height: 1.5;
 }
 
-/* ============= RESPONSIVE ============= */
+/* ========== RESPONSIVE ========== */
 @media (max-width: 768px) {
 
     .container,
@@ -510,30 +535,20 @@ a:hover {
         margin: 10px;
     }
 
-    .main-content {
+    .outer-box table {
         display: block;
     }
 
-    .left-column,
-    .right-column {
+    .outer-box td.sidebar,
+    .outer-box td.content {
         display: block;
-        width: 100%;
-        padding: 0;
-        margin-bottom: 10px;
+        width: 100% !important;
+        border: none !important;
+        padding: 10px !important;
     }
 
-    .profile-content table,
-    .creator-info table {
-        display: block;
-    }
-
-    .profile-picture-cell,
-    .profile-info-cell,
-    .creator-photo-cell,
-    .creator-details-cell {
-        display: block;
-        width: 100%;
-        border: none;
-        padding: 10px 0;
+    .page-header {
+        justify-content: center;
+        text-align: center;
     }
 }

@@ -55,21 +55,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>thefacebook | login</title>
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css?v=2.0">
 </head>
 <body>
     <!-- Header -->
-<div class="header">
-    <div class="header-content">
-        <a href="index.php" class="header-logo">thefacebook</a>
-        <span class="header-links">
-            <a href="login.php">login</a>
-            <a href="register.php">register</a>
-            <a href="contact.php">about</a>
-        </span>
-        <div style="clear:both;"></div>
+    <div class="header">
+        <div class="header-content">
+            <a href="index.php" class="header-logo">thefacebook</a>
+            <span class="header-links">
+                <a href="login.php">login</a>
+                <a href="register.php">register</a>
+                <a href="contact.php">about</a>
+            </span>
+        </div>
     </div>
-</div>
 
     <!-- Main Content -->
     <div class="login-container">
