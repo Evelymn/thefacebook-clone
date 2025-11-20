@@ -6,49 +6,93 @@ if (isset($_SESSION['user_id'])) {
     header("Location: home.php");
     exit();
 }
-
 require_once 'config/database.php';
 
 $error = '';
 $success = '';
+$login_error = '';
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $name = sanitizeInput($_POST['name'] ?? '');
-    $email = sanitizeInput($_POST['email'] ?? '');
-    $password = $_POST['password'] ?? '';
-    $confirm_password = $_POST['confirm_password'] ?? '';
-    $bio = sanitizeInput($_POST['bio'] ?? '');
+// ---------------------------------------------------------
+// 1. PROCESAR LOGIN (Sidebar)
+// ---------------------------------------------------------
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login_submit'])) {
+    $email = sanitizeInput($_POST['login_email'] ?? '');
+    $password = $_POST['login_password'] ?? '';
     
-    if (empty($name) || empty($email) || empty($password)) {
-        $error = "All fields are required.";
-    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $error = "Invalid email format.";
-    } elseif (!isUniversityEmail($email)) {
-        $error = "You must use a UVG university email address (@uvg.edu.gt or @est.uvg.edu.gt).";
-    } elseif (strlen($password) < 6) {
-        $error = "Password must be at least 6 characters.";
-    } elseif ($password !== $confirm_password) {
-        $error = "Passwords do not match.";
-    } else {
+    if (!empty($email) && !empty($password)) {
         $conn = getDBConnection();
-        $stmt = $conn->prepare("SELECT id FROM users WHERE email = ?");
+        $stmt = $conn->prepare("SELECT id, name, email, password, avatar FROM users WHERE email = ?");
         $stmt->bind_param("s", $email);
         $stmt->execute();
         $result = $stmt->get_result();
         
-        if ($result->num_rows > 0) {
-            $error = "This email is already registered.";
-        } else {
-            $stmt = $conn->prepare("INSERT INTO users (name, email, password, bio) VALUES (?, ?, ?, ?)");
-            $stmt->bind_param("ssss", $name, $email, $password, $bio);
-            
-            if ($stmt->execute()) {
-                $success = "Registration successful! You can now login.";
+        if ($result->num_rows === 1) {
+            $user = $result->fetch_assoc();
+            if ($password === $user['password']) {
+                $_SESSION['user_id'] = $user['id'];
+                $_SESSION['user_name'] = $user['name'];
+                $_SESSION['user_email'] = $user['email'];
+                $_SESSION['user_avatar'] = $user['avatar'];
+                session_regenerate_id(true);
+                header("Location: home.php");
+                exit();
             } else {
-                $error = "Registration failed. Please try again.";
+                $login_error = "Incorrect email or password.";
             }
+        } else {
+            $login_error = "Incorrect email or password.";
         }
-        
+        $stmt->close();
+        $conn->close();
+    }
+}
+
+// ---------------------------------------------------------
+// 2. PROCESAR REGISTRO (Formulario Principal)
+// ---------------------------------------------------------
+// Detectamos si es registro verficando que NO sea login y que venga el campo 'name'
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && !isset($_POST['login_submit']) && isset($_POST['name'])) {
+    
+    $name = sanitizeInput($_POST['name']);
+    $status = sanitizeInput($_POST['status']);
+    $email = sanitizeInput($_POST['email']);
+    $password = $_POST['password'];
+    $confirm_password = $_POST['confirm_password'];
+    $agree_terms = isset($_POST['agree_terms']);
+
+    // Validaciones básicas
+    if ($password !== $confirm_password) {
+        $login_error = "Passwords do not match."; // Usamos login_error para que salga en rojo arriba
+    } elseif (strlen($password) < 6) {
+        $login_error = "Password must be at least 6 characters.";
+    } elseif (!$agree_terms) {
+        $login_error = "You must agree to the Terms of Use.";
+    } else {
+        // Verificar si el email ya existe
+        $conn = getDBConnection();
+        $stmt = $conn->prepare("SELECT id FROM users WHERE email = ?");
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $stmt->store_result();
+
+        if ($stmt->num_rows > 0) {
+            $login_error = "That email is already registered.";
+        } else {
+            // INSERTAR NUEVO USUARIO
+            // Nota: En producción deberías usar password_hash($password, PASSWORD_DEFAULT)
+            // Pero para mantener el estilo 2004 simple, lo dejaremos texto plano o como lo tengas configurado
+          $stmt_insert = $conn->prepare("INSERT INTO users (name, status, email, password, registration_date) VALUES (?, ?, ?, ?, NOW())");
+            $stmt_insert->bind_param("ssss", $name, $status, $email, $password);
+
+            if ($stmt_insert->execute()) {
+                $success = "Registration successful! You can now login.";
+                // Limpiar formulario
+                $_POST = array();
+            } else {
+                $login_error = "Error creating account. Please try again.";
+            }
+            $stmt_insert->close();
+        }
         $stmt->close();
         $conn->close();
     }
@@ -63,72 +107,76 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="stylesheet" href="assets/css/style.css?v=2.0">
 </head>
 <body>
-    <!-- INCLUIR HEADER REUTILIZABLE -->
     <?php include 'includes/header.php'; ?>
 
-    <!-- Contenedor principal con sidebar y contenido -->
     <div class="container">
         <div class="outer-box">
             <table cellpadding="0" cellspacing="0" border="0">
                 <tr>
-                    <!-- SIDEBAR IZQUIERDO con opciones de login -->
                     <td class="sidebar">
                         <div class="login-panel">
-                            <div class="login-sidebar-box">
-                                <div class="login-section-title">
-                                    <a href="#">main</a>
-                                </div>
-
-                                <!-- Link para ir a login -->
-                                <div class="login-sidebar-section">
-                                    <a href="login.php">[ login ]</a>
-                                </div>
-                                
-                                <!-- Link para ir a register (página actual) -->
-                                <div class="login-sidebar-section">
-                                    <a href="register.php">[ register ]</a>
-                                </div>
-                            </div>
+                            <form method="POST" action="">
+                                <input type="hidden" name="login_submit" value="1">
+                                <table cellpadding="2" cellspacing="0">
+                                    <tr class="input-row">
+                                        <td align="right"><b>Email:</b></td>
+                                    </tr>
+                                    <tr class="input-row">
+                                        <td>
+<input type="email" id="sidebar_email" name="login_email" required class="input-field" value="<?php echo isset($_POST['login_email']) ? htmlspecialchars($_POST['login_email']) : ''; ?>">                                        </td>
+                                    </tr>
+                                    <tr class="input-row">
+                                        <td align="right"><b>Password:</b></td>
+                                    </tr>
+                                    <tr class="input-row">
+                                        <td><input type="password" name="login_password" required class="input-field"></td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center">
+                                            <a href="register.php" class="btn btn-ghost" style="margin-right:6px;">register</a>
+                                            <input type="submit" value="login" class="btn btn-primary">
+                                            
+                                        </td>
+                                    </tr>
+                                </table>
+                                <?php if ($login_error && isset($_POST['login_submit'])): ?>
+                                    <div class="error-message">
+                                        <?php echo $login_error; ?>
+                                    </div>
+                                <?php endif; ?>
+                            </form>
                         </div>
                     </td>
 
-                    <!-- CONTENIDO DERECHO con formulario de registro -->
                     <td class="content">
-                        <div class="content-box">
-                            <!-- Encabezado con título Registration -->
-                            <div class="login-content-header">Registration</div>
-
-                            <!-- Texto introductorio -->
+                      <div style="background-color: #3B5998; color: #ffffff; padding: 6px 10px; 
+                                    font-weight: bold; margin-bottom: 12px; font-size: 11px;">
+                            Registation
+                        </div>
                             <div style="margin: 15px 0; font-size: 11px; line-height: 1.6;">
                                 <p>To register for thefacebook.com, just fill in the four fields below. You will have a chance to enter additional information and submit a picture once you have registered.</p>
                             </div>
 
-                            <!-- Mostrar errores si existen -->
-                            <?php if ($error): ?>
-                                <div class="error-message">
-                                    <?php echo $error; ?>
+                            <?php if ($login_error && !isset($_POST['login_submit'])): ?>
+                                <div class="error-message" style="color: red; margin-bottom: 10px;">
+                                    <?php echo $login_error; ?>
                                 </div>
                             <?php endif; ?>
                             
-                            <!-- Mostrar mensaje de éxito si el registro fue exitoso -->
                             <?php if ($success): ?>
-                                <div class="success-message">
+                                <div class="success-message" style="background-color: #f0f8ff; border: 1px solid #d9edf7; color: #31708f; padding: 10px; margin-bottom: 15px;">
                                     <?php echo $success; ?>
-                                    <a href="login.php"><b>Click here to login</b></a>
-                                </div>
+<a href="#" onclick="document.getElementById('sidebar_email').focus(); return false;" style="font-weight: bold;">Click here to login</a>                                </div>
                             <?php endif; ?>
 
-                            <!-- Formulario de registro -->
                             <form method="POST" action="" style="margin: 20px 0;">
-                                <!-- Campo: Nombre -->
                                 <div style="margin-bottom: 12px;">
                                     <label style="display: inline-block; width: 100px; font-weight: bold;">Name:</label>
                                     <input type="text" name="name" required 
-                                           value="<?php echo isset($_POST['name']) ? htmlspecialchars($_POST['name']) : ''; ?>"
+                                           value="<?php echo isset($_POST['name']) && empty($success) ? htmlspecialchars($_POST['name']) : ''; ?>"
                                            style="width: 200px; padding: 3px; border: 1px solid #999;">
                                 </div>
 
-                                <!-- Campo: Estado (Dropdown) -->
                                 <div style="margin-bottom: 12px;">
                                     <label style="display: inline-block; width: 100px; font-weight: bold;">Status:</label>
                                     <select name="status" style="width: 200px; padding: 3px; border: 1px solid #999;">
@@ -140,16 +188,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     </select>
                                 </div>
 
-                                <!-- Campo: Email (con nota de que debe ser de la universidad) -->
                                 <div style="margin-bottom: 12px;">
                                     <label style="display: inline-block; width: 100px; font-weight: bold;">Email:</label>
                                     <input type="email" id="email" name="email" required 
-                                           value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>"
+                                           value="<?php echo isset($_POST['email']) && empty($success) ? htmlspecialchars($_POST['email']) : ''; ?>"
                                            style="width: 200px; padding: 3px; border: 1px solid #999;">
                                     <span style="font-size: 9px; color: #999;">(school)</span>
                                 </div>
 
-                                <!-- Campo: Contraseña con nota sobre seguridad -->
                                 <div style="margin-bottom: 12px;">
                                     <label style="display: inline-block; width: 100px; font-weight: bold;">Password*:</label>
                                     <input type="password" id="password" name="password" required minlength="6"
@@ -160,28 +206,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     </div>
                                 </div>
 
-                                <!-- Campo: Confirmar contraseña -->
                                 <div style="margin-bottom: 12px;">
                                     <input type="password" id="confirm_password" name="confirm_password" required
                                            style="width: 200px; padding: 3px; border: 1px solid #999; margin-left: 100px;">
                                 </div>
 
-                                <!-- Checkbox: Aceptar términos de uso -->
                                 <div style="margin-bottom: 15px; margin-left: 100px;">
                                     <input type="checkbox" name="agree_terms" required>
                                     I have read and understood the <a href="#">Terms of Use</a>, and I agree to them.
                                 </div>
 
-                                <!-- Botón de registro -->
                                 <div style="text-align: center; margin: 20px 0;">
                                     <input type="submit" value="Register Now!" class="btn btn-primary">
                                 </div>
                             </form>
 
-                            <!-- Link para login si ya tiene cuenta -->
-                            <div style="font-size: 11px; text-align: center; margin-top: 15px; padding-top: 15px; border-top: 1px solid #ccc;">
-                                Already have an account? <a href="login.php"><b>Login here</b></a>
-                            </div>
+                           <div style="font-size: 11px; text-align: center; margin-top: 15px; padding-top: 15px; border-top: 1px solid #ccc;">
+    Already have an account? <a href="#" onclick="document.getElementById('sidebar_email').focus(); return false;"><b>Login here</b></a>
+</div>
                         </div>
                     </td>
                 </tr>
@@ -189,7 +231,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
     </div>
 
-    <!-- FOOTER -->
     <div class="footer">
         <a href="contact.php">about</a>
         <a href="#">contact</a>
