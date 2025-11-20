@@ -152,7 +152,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <!-- FOOTER -->
     <div class="footer">
         <a href="contact.php">about</a>
-        <a href="#">contact</a>
         <a href="#">faq</a>
         <a href="#">terms</a>
         <a href="#">privacy</a>

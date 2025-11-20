@@ -233,7 +233,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !isset($_POST['login_submit']) && is
 
     <div class="footer">
         <a href="contact.php">about</a>
-        <a href="#">contact</a>
         <a href="#">jobs</a>
         <a href="#">announce</a>
         <a href="#">advertise</a>

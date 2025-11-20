@@ -48,3 +48,4 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['user_avatar'])) {
         </div>
     </div>
 </div>
+
